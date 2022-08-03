@@ -1,12 +1,14 @@
 {
   "users":[
     {
-      "email":"madhu@test.com",
-      "password":"abcd"
+      "name":"Admin",
+      "permission":"all",
+      "password":"Admin"
     },
     {
-      "email":"shubha@test.com",
-      "password":"abcd"
+      "name":"MyName",
+      "permission":"none",
+      "password":"MyName"
     }
   ]
 }
