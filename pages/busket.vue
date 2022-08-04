@@ -14,7 +14,7 @@
     </nav>
     <div class="mt-3">
       <h6 align="center">Please choose items to your bucket</h6>
-      <div class="grid grid-cols-3 gap-5 mt-14">
+      <div class="grid grid-cols-3 gap-5 mt-14 mb-9">
         <div
           class="p-6 max-w-sm bg-red-500 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
         >
@@ -28,12 +28,12 @@
           </div>
           <div class="flex flex-1 justify-center">
             <button
-              v-on:click="add"
+              @click="per? add() : al()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               +</button
             ><button
-              v-on:click="remove"
+              @click="per? remove() : al()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               -
@@ -53,12 +53,12 @@
           </div>
           <div class="flex flex-1 justify-center">
             <button
-              @click="add1"
+              @click="per? add1() : al()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               +</button
             ><button
-              v-on:click="remove1"
+              @click="per? remove1() : al2()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               -
@@ -78,12 +78,12 @@
           </div>
           <div class="flex flex-1 justify-center">
             <button
-              v-on:click="add2"
+              @click="per? add2() : al()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               +</button
             ><button
-              v-on:click="remove2"
+               @click="per? remove2() : al2()"
               class="py-2 px-4 rounded-full h-14 w-14 bg-white text-black mx-1"
             >
               -
@@ -144,7 +144,18 @@ export default {
         Grapes: "grapes",
       },
       show: true,
+      per:false,
     };
+  },
+  created(){
+  this.per=this.$route.params.per;
+  if(this.per==="all"){
+  this.per=true;
+  }
+  else{
+    this.per=false
+  }
+  console.warn(this.per)
   },
   methods: {
     add() {
@@ -153,7 +164,7 @@ export default {
         this.basket.push(this.apple.name);
         this.show = false;
       } else {
-        alert("you already aaded 10 item");
+        alert("Sorry!You ran out of Apples");
       }
     },
     remove() {
@@ -169,7 +180,7 @@ export default {
         this.orange.count = this.orange.count === 0 ? 0 : this.orange.count - 1;
         this.basket.push(this.orange.name);
       } else {
-        alert("You have selected 10 items");
+        alert("There are No Enough Oranges in cart");
       }
     },
     remove1() {
@@ -186,7 +197,7 @@ export default {
         this.grapes.count = this.grapes.count === 0 ? 0 : this.grapes.count - 1;
         this.basket.push(this.grapes.name);
       } else {
-        alert("You have selected 10 items ");
+        alert("There are No Enough grapes left ");
       }
     },
     remove2() {
@@ -198,6 +209,9 @@ export default {
       } else {
         alert("You have selected invalid item ");
       }
+    },
+    al(){
+        alert("Sorry!You dont have access")
     },
   },
 };
